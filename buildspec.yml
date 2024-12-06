@@ -9,6 +9,8 @@ phases:
   pre_build:
     commands:
       - python --version
+      - python manage.py collectstatic --noinput
+      - pylint elibrary/**/*.py || true
   build:
     commands:
       - sleep 5
