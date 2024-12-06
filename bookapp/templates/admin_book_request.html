@@ -69,9 +69,9 @@
      
                 {% csrf_token %}
                 {% for obj in book_lst %}
-                <tr style="background-color:black">
-                  <td  class="text-nowrap" style="color:black; font-weight:bold;">{{obj.book__book_title}} </td>
-                  <td class="text-nowrap" style="color:black;  font-weight:bold;">{{obj.user__username}}</td>
+                <tr style="background-color:#15616d">
+                  <td  class="text-nowrap" style="color:white; font-weight:bold;">{{obj.book__book_title}} </td>
+                  <td class="text-nowrap" style="color:white;  font-weight:bold;">{{obj.user__username}}</td>
                   <td>
                     <div class="form-check d-flex justify-content-center" style="color:green; font-weight:bold;">
                       <input name="approved_{{obj.id}}" value="{{obj.id}}" class="form-check-input" type="checkbox" id="defaultCheck1{{ obj.id }}"

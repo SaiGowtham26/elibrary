@@ -1,4 +1,10 @@
 version: 0.2
+env:
+  secrets-manager:
+    LOGIN: prod/sonar/x23337818:sonartoken
+    HOST: prod/sonar/x23337818:HOST
+    Organization: prod/sonar/x23337818:Organization
+    Project: prod/sonar/x23337818:Project
 phases:
   install:
     runtime-versions:
@@ -19,9 +25,9 @@ phases:
       - echo "pre build stage completed"
   build:
     commands:
-      - sonar-scanner -Dsonar.login=2cfd70d8698094814578226ae8718d038deff91f -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=SaiGowtham26_elibrary -Dsonar.organization=saigowtham || true
+      - sonar-scanner -Dsonar.login=$LOGIN -Dsonar.host.url=$HOST -Dsonar.projectKey=$Project -Dsonar.organization=$Organization || true
       - sleep 5
-      - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=SaiGowtham26_elibrary >result.json
+      - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=$Project >result.json
       - cat result.json
       - if [ $(jq -r '.projectStatus.status' result.json) = ERROR ] ; then $CODEBUILD_BUILD_SUCCEEDING -eq 0 ;fi
       - echo "Build stage completed"
